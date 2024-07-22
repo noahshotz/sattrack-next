@@ -12,7 +12,7 @@ const fontSans = FontSans({
 
 export const metadata: Metadata = {
   title: "sattrack",
-  description: "Build by Deniz, Melvin, Max & Chris",
+  description: "Monitor satellites and man-made objects in earth orbit. Build by Team digital bando",
 };
 
 export default function RootLayout({
@@ -21,7 +21,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
@@ -33,7 +36,8 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
-        >{children}
+        >
+          {children}
         </ThemeProvider>
       </body>
     </html>
