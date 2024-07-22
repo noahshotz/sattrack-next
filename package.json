@@ -1,7 +1,14 @@
 {
   "name": "sattrack-next",
+  "description": "A web app for tracking satellites and space stations using N2YO API.",
+  "author": "Max Heinrich, Melvin Feiertag and Deniz Petzold",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/noahshotz/sattrack-next"
+  },
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
