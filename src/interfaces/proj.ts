@@ -1,3 +1,8 @@
+/**
+ * This file contains the interfaces and types related to the projection of the map.
+ * For more information, visit: https://visgl.github.io/react-map-gl/docs/api-reference/map
+ */
+
 export type ProjectionType = "globe" | "albers" | "equalEarth" | "equirectangular" | "lambertConformalConic" | "mercator" | "naturalEarth" | "winkelTripel"
 
 export const ProjectionTypes = [
@@ -34,5 +39,3 @@ export const ProjectionTypes = [
         label: "Winkel Tripel"
     }
 ] as const
-
-    
