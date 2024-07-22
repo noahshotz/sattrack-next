@@ -14,10 +14,10 @@ export const ProjectionController: React.FC<ProjectionControllerProps> = ({ proj
                 onValueChange={(value) => setProjection(value as ProjectionType)}
                 value={projection}
             >
-                <SelectTrigger className="w-auto mt-2.5 mr-2.5">
+                <SelectTrigger className="w-auto">
                     <SelectValue placeholder="Change Projection" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="">
                     <SelectGroup>
                         <SelectLabel>Projection</SelectLabel>
                         {ProjectionTypes.map((type) => (

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
+import { useTheme } from "next-themes"
 import { Map, Source, Layer, NavigationControl, Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useTLEData } from '../context/TLEContext';
@@ -15,11 +16,17 @@ import { StatusBadge } from './StatusBadge';
 //import CustomOverlay from './CustomOverlay';
 import { ProjectionController } from './ProjectionController';
 import { ProjectionType } from '../interfaces/proj';
+import { ModeToggle } from './ModeToggle';
 
 export const MapView: React.FC = () => {
 
     // state for Mapbox token
     const [mapboxToken, setMapboxToken] = useState<string | null>(null);
+
+    const { theme } = useTheme()
+
+    const lightMapStyle = "mapbox://styles/egenusmax/clyx2z9dj009i01pff5ws9ii8"
+    const darkMapStyle = "mapbox://styles/egenusmax/clxxufklp000f01qpa6my5vuu"
 
     // get TLE data and countdown from context
     const { tleData, countdown, progress } = useTLEData();
@@ -86,12 +93,13 @@ export const MapView: React.FC = () => {
     }
 
     return (
-        <div className="w-full h-[100vh] bg-zinc-950">
-            <div className="absolute z-10 m-2 text-white">
+        <div className="w-full h-[100vh]">
+            <div className="absolute z-10 m-2">
                 <StatusBadge isOnline={isOnline} />
                 <p className="mt-1">Next update in: {countdown} seconds</p>
             </div>
-            <div className="absolute z-10 m-2 text-white right-0">
+            <div className="absolute flex flex-row gap-2 items-center z-10 m-2 right-0">
+                <ModeToggle />
                 <ProjectionController
                     projection={projection}
                     setProjection={setProjection}
@@ -110,7 +118,7 @@ export const MapView: React.FC = () => {
                     zoom: 3,
                 }}
                 attributionControl={false}
-                mapStyle="mapbox://styles/egenusmax/clxxufklp000f01qpa6my5vuu"
+                mapStyle={theme === "dark" ? darkMapStyle : lightMapStyle}
                 mapboxAccessToken={mapboxToken}
             >
 
