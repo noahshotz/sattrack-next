@@ -1,3 +1,9 @@
+# sattrack-next
+## About the project
+Monitor live flight data for multiple satellites and man-made objects in earth orbit via TLE propagation. TLE data supplied by N2YO. Calculations made using satellite.js (https://github.com/shashwatak/satellite-js). Build with Next.js and shadcn.
+
+---
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
