@@ -1,28 +1,38 @@
 # sattrack-next
+
 ## About the project
 Monitor live flight data for multiple satellites and man-made objects in earth orbit via TLE propagation. TLE data supplied by N2YO. Calculations made using satellite.js (https://github.com/shashwatak/satellite-js). Build with Next.js and shadcn.
 
----
+## Getting started
+### Prerequisities
+- Node.js 18.0.0 or better
+- npm 8.0.0 or better
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### Enviroments variables
+Before running the application a few enviroment variables are required. These are described in ```.env.template```. After you cloned the project make sure to create a new ```.env``` and add them in there.
 
-## Getting Started
+### Installation
+Clone the project:
+```
+git clone https://github.com/noahshotz/sattrack-next.git
+```
 
-First, run the development server:
+Navigate into the directory:
+```
+cd sattrack-next
+```
 
-```bash
+Install dependencies:
+```
+npm install
+```
+
+Run locally:
+```
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
