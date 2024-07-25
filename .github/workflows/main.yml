@@ -28,7 +28,7 @@ jobs:
       - name: Build project
         run: |
           export NODE_OPTIONS="--max-old-space-size=8192"
-          npm run build
+          npx next build
 
       - name: Sentry release setup
         env:
