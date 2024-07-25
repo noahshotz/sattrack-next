@@ -56,7 +56,7 @@ jobs:
       - name: Run tests
         run: |
           export NODE_OPTIONS="--max-old-space-size=4096"
-          npm test -- --reporter junit --outputFile junit.xml
+          npm run test
 
       - name: Archive test results
         if: always()
