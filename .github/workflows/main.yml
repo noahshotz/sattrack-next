@@ -5,6 +5,10 @@ on:
     branches:
       - master
       - dev
+  pull_request:
+    branches:
+      - master
+      - dev
 
 jobs:
   build:
@@ -19,12 +23,20 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build project
         run: |
           export NODE_OPTIONS="--max-old-space-size=8192"
           npm run build
+
+      - name: Sentry release setup
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+        run: |
+          npx sentry-cli releases new --project sattrack ${{ github.sha }}
+          npx sentry-cli releases set-commits --auto --ignore-missing --project sattrack ${{ github.sha }}
+          npx sentry-cli releases finalize --project sattrack ${{ github.sha }}
 
   test:
     runs-on: ubuntu-latest
@@ -39,7 +51,7 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run tests
         run: |
@@ -67,7 +79,7 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Install Vercel CLI
         run: npm install --global vercel
@@ -78,9 +90,9 @@ jobs:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
-          vercel pull --yes --environment=production --token=$SATTRACK_TOKEN
-          vercel build --prod --token=$VERCEL_TOKEN
-          vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN
+          vercel pull --yes --environment=preview --token=$VERCEL_TOKEN
+          vercel build --token=$VERCEL_TOKEN
+          vercel deploy --prebuilt --token=$VERCEL_TOKEN
 
   deploy_production:
     runs-on: ubuntu-latest
@@ -96,7 +108,7 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Install Vercel CLI
         run: npm install --global vercel
@@ -107,6 +119,6 @@ jobs:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
-          vercel pull --yes --environment=production --token=$SATTRACK_TOKEN
-          vercel build --prod --token=$SATTRACK_TOKEN
-          vercel deploy --prebuilt --prod --token=$SATTRACK_TOKEN
+          vercel pull --yes --environment=production --token=$VERCEL_TOKEN
+          vercel build --prod --token=$VERCEL_TOKEN
+          vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN
