@@ -1,6 +1,9 @@
 ![sattrack-header](./sattrack-readme-header.png)
 # sattrack-next
 
+## Live demo
+You can view the app here: https://sattrack-v1-0.vercel.app/
+
 ## About the project
 Monitor live flight data for multiple satellites and man-made objects in earth orbit via TLE propagation. TLE data supplied by N2YO. Calculations made using satellite.js (https://github.com/shashwatak/satellite-js). Build with Next.js and shadcn.
 
