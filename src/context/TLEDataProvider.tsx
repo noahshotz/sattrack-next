@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback, ReactNode, useMemo } from 'react';
 import { TLE } from '../interfaces/tle';
 import { TLEDataContext } from './TLEContext';
-import { getSatTLE } from '../api/sat';
+import { getSatTLE } from '@/api/sat';
 import ErrorComponent from '@/components/ErrorComponent';
 
 interface TLEDataProviderProps {
