@@ -28,10 +28,16 @@ export async function getSatTLE(satId: string): Promise<TLE> {
 
     const axiosInstance = createAxiosInstance(`${reverseProxy}https://api.n2yo.com/rest/v1/satellite/`);
 
-    return axiosInstance.get(`/tle/${satId}/&apiKey=${apiKey}`)
+    return axiosInstance.get(`/tle/${satId}/&apiKey=${apiKey}`, {
+        headers: {
+            'x-requested-with': 'XMLHttpRequest',
+            'origin': window.location.origin
+        }
+    })
         .then(response => response.data)
         .catch(error => {
             console.error("Error: " + error);
             throw error;
         });
+
 }
