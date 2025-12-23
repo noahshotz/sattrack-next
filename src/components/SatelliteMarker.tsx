@@ -18,7 +18,7 @@ const SatelliteMarker = forwardRef<HTMLDivElement, SatelliteMarkerProps>(({ sat 
                 <div className="text-zinc-950 dark:text-[#ababab]">{lat.toFixed(2)}°, {lng.toFixed(2)}° @ {velocity.toFixed(1)} km/s</div>
             </div>
             <div className="bg-zinc-200 dark:bg-[#11221b] p-1">
-                <SattrackIcon size={24} color={theme === "dark" ? "#fff" : "#000"} />
+                <SattrackIcon size={24} color={theme === "dark" ? "#fff" : "#11221b"} />
             </div>
         </div>
     );

@@ -1,4 +1,3 @@
-import createAxiosInstance from "./axiosInstance";
 import { TLE } from "../interfaces/tle";
 
 /**
@@ -7,31 +6,16 @@ import { TLE } from "../interfaces/tle";
  * @returns Promise<TLE> - TLE data for the satellite
  */
 export async function getSatTLE(satId: string): Promise<TLE> {
-    // Fetch the API key and reverse proxy URL from the API route
-    const { apiKey, reverseProxy } = await fetch('/api/satTokens')
-        .then(res => {
-            if (!res.ok) {
-                throw new Error('Failed to fetch API token');
-            }
-            return res.json();
-        });
-
-    if (!reverseProxy) {
-        throw new Error("Reverse Proxy URL is required");
-    }
     if (!satId) {
         throw new Error("Satellite ID is required");
     }
-    if (!apiKey) {
-        throw new Error("API Key is required");
+
+    const response = await fetch(`/api/satellite/${satId}`);
+
+    if (!response.ok) {
+        const error = await response.json().catch(() => ({ error: 'Failed to fetch satellite data' }));
+        throw new Error(error.error || 'Failed to fetch satellite data');
     }
 
-    const axiosInstance = createAxiosInstance(`${reverseProxy}https://api.n2yo.com/rest/v1/satellite/`);
-
-    return axiosInstance.get(`/tle/${satId}/&apiKey=${apiKey}`)
-        .then(response => response.data)
-        .catch(error => {
-            console.error("Error: " + error);
-            throw error;
-        });
+    return response.json();
 }
